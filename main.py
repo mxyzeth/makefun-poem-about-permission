@@ -17,9 +17,13 @@ OUTPUT_PATH = "/output/entry.txt"
 
 
 def main():
+    # The gate counts Unicode code points: 1 to 280, not only whitespace.
+    text = POEM + "\n"
+    if not 1 <= len(text) <= 280 or not text.strip():
+        raise ValueError(f"entry.txt would be {len(text)} chars, outside the 1-280 gate")
     os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
-        f.write(POEM + "\n")
+        f.write(text)
 
 
 if __name__ == "__main__":
